@@ -1,0 +1,21 @@
+{
+  "name": "carbey-website",
+  "version": "1.0.0",
+  "description": "Carbey corporate website",
+  "main": "dist/index.html",
+  "scripts": {
+    "build": "npm run build",
+    "start": "npx serve dist -s"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "build": {
+    "command": "npm run build",
+    "output": "dist"
+  },
+  "deploy": {
+    "type": "static",
+    "public": "dist"
+  }
+}
