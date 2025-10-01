@@ -52,8 +52,8 @@ const Contact: React.FC = () => {
         if (formData.type === "document") {
           toast.success("資料請求ありがとうございます！ダウンロードが始まります。");
           const link = document.createElement("a");
-          link.href = "/Carbey_ホワイトペーパー.pdf"; // must be inside public/
-          link.download = "Carbey_ホワイトペーパー.pdf";
+          link.href = "/carbey-whitepaper.pdf";
+          link.download = "carbey-whitepaper.pdf";
           link.click();
         } else {
           toast.success("お問い合わせありがとうございます！追ってご連絡いたします。");

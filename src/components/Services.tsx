@@ -216,7 +216,7 @@ const Services: React.FC = () => {
             onClick={handleDownload}
             className="flex-1 bg-gray-800 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors duration-200"
           >
-            <a href="/Carbey_ホワイトペーパー.pdf" download="Carbey_ホワイトペーパー.pdf">
+            <a href="/carbey-whitepaper.pdf" download="carbey-whitepaper.pdf">
               ダウンロード
             </a>
           </button>
