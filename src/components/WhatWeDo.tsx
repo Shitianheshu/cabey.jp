@@ -9,7 +9,7 @@ const WhatWeDo: React.FC = () => {
   const handleDownload = () => {
     // ここに実際のダウンロード処理を実装
     const link = document.createElement("a");
-    link.href = "/white-paper.pdf";
+    link.href = "/ホワイトペーパー.pdf";
     link.download = "ホワイトペーパー.pdf";
     link.click();
     console.log('ホワイトペーパーをダウンロード中...');
