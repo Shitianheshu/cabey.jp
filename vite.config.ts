@@ -8,6 +8,7 @@ export default defineConfig({
     exclude: ['lucide-react'],
   },
   server: {
+    host: '0.0.0.0',
     proxy: {
       '/api': {
         target: 'https://script.google.com/macros/s/AKfycbyIqsKRANwDwWkZ4e9BzTfFJvstLBmhVw_doFExzf2deS1WycK36F9bj2F7urkSLanivA/exec',

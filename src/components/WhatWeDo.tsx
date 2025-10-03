@@ -8,6 +8,10 @@ const WhatWeDo: React.FC = () => {
 
   const handleDownload = () => {
     // ここに実際のダウンロード処理を実装
+    const link = document.createElement("a");
+    link.href = "/ホワイトペーパー.pdf";
+    link.download = "ホワイトペーパー.pdf";
+    link.click();
     console.log('ホワイトペーパーをダウンロード中...');
     setIsModalOpen(false);
   };
