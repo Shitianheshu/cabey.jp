@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { toast } from "react-toastify";
-import sendEmail from '../../api/smtpClient'
+import {sendEmail} from '../../api/smtpClient'
 import "react-toastify/dist/ReactToastify.css";
 
 const Contact: React.FC = () => {
