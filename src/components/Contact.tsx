@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { toast } from "react-toastify";
-import {sendEmail} from '../../api/smtpClient'
+import * as emailjs from '@emailjs/browser';
+
 import "react-toastify/dist/ReactToastify.css";
 
 const Contact: React.FC = () => {
   const location = useLocation();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<any>({
     company: '',
     name: '',
     email: '',
+    time: '',
+    down_link: '',
     phone: '',
     message: '',
     type: location.search.includes("type=document") ? "document" : "contact"
@@ -18,7 +21,7 @@ const Contact: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev:any) => ({
       ...prev,
       [name]: value
     }));
@@ -28,25 +31,24 @@ const Contact: React.FC = () => {
     e.preventDefault();
 
     location.search.includes("type=document") ? formData.type = "document" : formData.type = "contact";
-
+    const now = new Date();
+    const pad = (n:any) => n.toString().padStart(2, '0');
+    const formattedDate = `${pad(now.getMonth() + 1)}/${pad(now.getDate())}/${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+    const sendData:any={
+      company:formData.company,
+      name: formData.name,
+      email: formData.email,
+      time: formattedDate,
+      down_link: 'https://carbey.jp/ホワイトペーパー.pdf',
+      phone: formData.phone,
+      message: formData.message
+    }
     try {
-      const res = await sendEmail({
-        to: formData.email,
-        from: "noreply@carbey.jp",
-        subject: "資料ダウンロードのご案内",
-        body: `こんにちは、
-
-      資料請求いただきありがとうございます。
-      以下のリンクから最新版の資料をダウンロードしてください：
-      https://carbey.jp/ホワイトペーパー.pdf
-        `,
-        secureToken: "1aee6c6b-0169-4919-bdf4-2d2a91896cf9", // SMTP.js のトークンに置き換えてください
-      });
-
-
-
-      if (res === "OK") {
-        // 🔽 Clear form
+      emailjs.sendForm('service_xiue0lq', 'template_cwkfrl8', sendData, {
+        publicKey: 'ltfVvKgTVgzmJnLod',
+      })
+      .then(
+        () => {
         setFormData({
           company: '',
           name: '',
@@ -56,21 +58,17 @@ const Contact: React.FC = () => {
           type: formData.type
         });
 
-        // 🔽 Trigger PDF download
-        if (formData.type === "document") {
-          toast.success("資料請求ありがとうございます！ダウンロードが始まります。");
-          const link = document.createElement("a");
-          link.href = "/HP資料請求・資料.pdf";
-          link.download = "HP資料請求・資料.pdf";
-          link.click();
-        } else {
-          toast.success("お問い合わせありがとうございます！追ってご連絡いたします。");
-        }
-
-      } else {
-        toast.error("送信に失敗しました。もう一度お試しください。");
-      }
-    } catch (err) {
+          if (formData.type === "document") {
+            toast.success("資料請求ありがとうございます！ダウンロードが始まります。");
+          } else {
+            toast.success("お問い合わせありがとうございます！追ってご連絡いたします。");
+          }
+        },
+        (error:any) => {
+          console.log('FAILED...', error.text);
+        },
+      );
+  }catch (err) {
       console.error(err);
     }
   };
