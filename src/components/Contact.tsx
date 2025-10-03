@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { toast } from "react-toastify";
-import * as emailjs from '@emailjs/browser';
+import emailjs from '@emailjs/browser';
+
 
 import "react-toastify/dist/ReactToastify.css";
 
