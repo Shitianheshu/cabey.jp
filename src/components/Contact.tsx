@@ -40,7 +40,7 @@ const Contact: React.FC = () => {
       name: formData.name,
       email: formData.email,
       time: formattedDate,
-      down_link: 'https://carbey.jp/ホワイトペーパー.pdf',
+      down_link: formData.type=='document' ? 'https://carbey.jp/white-paper.pdf' : 'https://carbey.jp/information.pdf',
       phone: formData.phone,
       message: formData.message
     }
