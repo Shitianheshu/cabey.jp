@@ -45,7 +45,7 @@ const Contact: React.FC = () => {
       message: formData.message
     }
     try {
-      emailjs.sendForm('service_xiue0lq', 'template_cwkfrl8', sendData, {
+      emailjs.send('service_xiue0lq', 'template_cwkfrl8',sendData , {
         publicKey: 'ltfVvKgTVgzmJnLod',
       })
       .then(
@@ -66,6 +66,7 @@ const Contact: React.FC = () => {
           }
         },
         (error:any) => {
+          console.log(error, 'error')
           console.log('FAILED...', error.text);
         },
       );
